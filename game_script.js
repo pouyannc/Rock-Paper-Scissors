@@ -24,9 +24,11 @@ function playRound(playerSelection, computerSelection) { //plays a round of rock
     } else return 0;
 }
 
-function updateScore (playerSelection) {
+function updateScore (event) {
     computerSelection = getComputerChoice();
     computerChoiceTxt.textContent = "Computer chose: " + computerSelection;
+
+    playerSelection = event.currentTarget.classList.toString();
 
     roundOutcome = playRound(playerSelection, computerSelection);
 
@@ -35,24 +37,38 @@ function updateScore (playerSelection) {
     else if (roundOutcome.substring(4,8) == "lose") computerScore++;
 
     playerScoreTxt.textContent = playerScore;
+    computerScoreTxt.textContent = computerScore;
+
+    if (playerScore===5 || computerScore===5) gameOver(playerScore);
 }
 
-const rockButton = document.querySelector(".rockButton");
-const paperButton = document.querySelector(".paperButton");
-const scissorsButton = document.querySelector(".scissorsButton");
+function gameOver(pScore) {
+    let winner;
+    pScore === 5 ? winner = "You are" : winner = "Computer is";
+    gameEndTxt.textContent = `Game over. ${winner} the winner.`;
+    rockButton.removeEventListener('click', updateScore);
+    paperButton.removeEventListener('click', updateScore);
+    scissorsButton.removeEventListener('click', updateScore);
+}
+
+const rockButton = document.querySelector(".rock");
+const paperButton = document.querySelector(".paper");
+const scissorsButton = document.querySelector(".scissors");
 const computerChoiceTxt = document.querySelector(".computerChoice");
 const roundResult = document.querySelector(".roundResult");
 const playerScoreTxt = document.querySelector(".playerScore");
 const computerScoreTxt = document.querySelector(".computerScore");
+const gameEndTxt = document.querySelector(".gameEnd");
 
 
 let playerSelection, computerSelection, roundOutcome;
 let playerScore = 0;
 let computerScore = 0;
 
-rockButton.addEventListener('click', () => updateScore("rock"));
-paperButton.addEventListener('click', () => updateScore("paper"));
-scissorsButton.addEventListener('click', () => updateScore("scissors"));
+rockButton.addEventListener('click', updateScore);
+paperButton.addEventListener('click', updateScore);
+scissorsButton.addEventListener('click', updateScore);
+
 
 
 
