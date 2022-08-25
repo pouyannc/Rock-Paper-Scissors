@@ -1,0 +1,16 @@
+.cScoreContainer, .pScoreContainer {
+    display: flex;
+    justify-content: center;
+    padding: 10px 100px;
+    text-align:justify;
+}
+
+div {
+    padding: 10px;
+    text-align: center;
+}
+
+button {
+    padding: 20px;
+    border-radius: 4px;
+}

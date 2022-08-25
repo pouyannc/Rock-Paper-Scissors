@@ -46,6 +46,23 @@ function gameOver(pScore) {
     let winner;
     pScore === 5 ? winner = "You are" : winner = "Computer is";
     gameEndTxt.textContent = `Game over. ${winner} the winner.`;
+    endGame();
+
+}
+
+function startGame () {
+    startButton.textContent = "RESTART";
+    gameEndTxt.textContent = "";
+    playerScore = 0;
+    computerScore = 0;
+    playerScoreTxt.textContent = playerScore;
+    computerScoreTxt.textContent = computerScore;
+    rockButton.addEventListener('click', updateScore);
+    paperButton.addEventListener('click', updateScore);
+    scissorsButton.addEventListener('click', updateScore);
+}
+
+function endGame() {
     rockButton.removeEventListener('click', updateScore);
     paperButton.removeEventListener('click', updateScore);
     scissorsButton.removeEventListener('click', updateScore);
@@ -59,15 +76,15 @@ const roundResult = document.querySelector(".roundResult");
 const playerScoreTxt = document.querySelector(".playerScore");
 const computerScoreTxt = document.querySelector(".computerScore");
 const gameEndTxt = document.querySelector(".gameEnd");
+const startButton = document.querySelector(".start");
 
 
-let playerSelection, computerSelection, roundOutcome;
-let playerScore = 0;
-let computerScore = 0;
+let playerSelection, computerSelection, roundOutcome, playerScore, computerScore;
 
-rockButton.addEventListener('click', updateScore);
-paperButton.addEventListener('click', updateScore);
-scissorsButton.addEventListener('click', updateScore);
+
+startButton.addEventListener('click', startGame);
+
+
 
 
 
